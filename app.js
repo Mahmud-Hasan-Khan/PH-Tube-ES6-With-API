@@ -19,37 +19,49 @@ const allCategories = async () => {
 }
 allCategories();
 
-// load & display category wise data 
+let categoryWiseData = [];
 const loadCategoryWiseData = async (categoryId) => {
     console.log(categoryId);
     const res = await fetch(`https://openapi.programming-hero.com/api/videos/category/${categoryId}`);
     const data = await res.json();
-    const categoryWiseData = data.data
-    console.log(categoryWiseData)
+    categoryWiseData = data.data;
+    console.log(categoryWiseData);
+    updateCategoryCards();
+}
 
+const updateCategoryCards = () => {
     const categoriesCardContainer = document.getElementById('category-container');
-
-    // clear previous content
     categoriesCardContainer.textContent = "";
 
     categoryWiseData.forEach(singleCardData => {
-        console.log(singleCardData);
         const categoriesCardDiv = document.createElement('div');
         categoriesCardDiv.innerHTML = `
-        <div class="card card-compact bg-base-100 shadow-xl">
-            <figure><img class="h-56" src=${singleCardData.thumbnail} alt="Category Info" /></figure>
-            <div class="card-body">
-                <div class="flex items-center gap-3">
-                    <img class="w-10 h-10 rounded-full inline" src=${singleCardData?.authors[0]?.profile_picture} >
-                    <h2 class="card-title">${singleCardData.title}</h2>
+                <div class="card card-compact bg-base-100 shadow-xl">
+                    <figure><img class="h-56" src=${singleCardData.thumbnail} alt="Category Info" /></figure>
+                    <div class="card-body">
+                        <div class="flex items-center gap-3">
+                            <img class="w-10 h-10 rounded-full inline" src=${singleCardData?.authors[0]?.profile_picture} >
+                            <h2 class="card-title">${singleCardData.title}</h2>
+                        </div>
+                        <p>${singleCardData?.authors[0].profile_name}</p>
+                        <p>${singleCardData?.others?.views} views</p>
+                    </div>
                 </div>
-                <p>${singleCardData?.authors[0].profile_name}</p>
-                <p>${singleCardData?.others?.views} views</p>
-            </div>
-      </div>
-    `;
-        categoriesCardContainer.appendChild(categoriesCardDiv)
+                `;
+        categoriesCardContainer.appendChild(categoriesCardDiv);
     });
-}
-loadCategoryWiseData('1000')
+};
 
+// show card as per higher views to lower views
+const sortByViews = () => {
+    categoryWiseData.sort((a, b) => {
+
+        const viewsA = parseFloat(a.others.views.replace(/[^\d.]/g, ''));
+        const viewsB = parseFloat(b.others.views.replace(/[^\d.]/g, ''));
+        return viewsB - viewsA;
+    });
+    updateCategoryCards();
+}
+
+// Load the All categories data initially
+loadCategoryWiseData('1000');
