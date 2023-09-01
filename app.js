@@ -51,6 +51,5 @@ const loadCategoryWiseData = async (categoryId) => {
         categoriesCardContainer.appendChild(categoriesCardDiv)
     });
 }
-
 loadCategoryWiseData('1000')
 
