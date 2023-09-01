@@ -21,7 +21,7 @@ allCategories();
 
 let categoryWiseData = [];
 const loadCategoryWiseData = async (categoryId) => {
-    console.log(categoryId);
+    // console.log(categoryId);
     const res = await fetch(`https://openapi.programming-hero.com/api/videos/category/${categoryId}`);
     const data = await res.json();
     categoryWiseData = data.data;
@@ -30,13 +30,30 @@ const loadCategoryWiseData = async (categoryId) => {
 }
 
 const updateCategoryCards = () => {
+    // get card container
     const categoriesCardContainer = document.getElementById('category-container');
+    // clear card container before show another categories data 
     categoriesCardContainer.textContent = "";
+
+    // convert "posted_date" value seconds to Hour and Minutes
+    function convertSecondsToHoursAndMinutes(totalSeconds) {
+        const totalMinutes = Math.floor(totalSeconds / 60);
+        const seconds = totalSeconds % 60;
+        const hours = Math.floor(totalMinutes / 60);
+        const minutes = totalMinutes % 60;
+
+        if (hours > 0 || minutes > 0) {
+            return `${hours}hrs ${minutes}min ago`;
+        } else {
+            return '';
+        }
+    }
+
 
     categoryWiseData.forEach(singleCardData => {
         const categoriesCardDiv = document.createElement('div');
         categoriesCardDiv.innerHTML = `
-                <div class="card card-compact bg-base-100 shadow-xl">
+                <div class="card card-compact bg-base-100 shadow-xl relative">
                     <figure><img class="h-56" src=${singleCardData.thumbnail} alt="Category Info" /></figure>
                     <div class="card-body">
                         <div class="flex items-center gap-3">
@@ -45,6 +62,7 @@ const updateCategoryCards = () => {
                         </div>
                         <p>${singleCardData?.authors[0].profile_name}</p>
                         <p>${singleCardData?.others?.views} views</p>
+                        <p class="absolute bottom-36 right-5 bg-black px-1.5 py-1 rounded text-white">${convertSecondsToHoursAndMinutes(singleCardData.others.posted_date ? singleCardData.others.posted_date : '')}</p>
                     </div>
                 </div>
                 `;
@@ -52,12 +70,25 @@ const updateCategoryCards = () => {
     });
 };
 
+const extractAndConvertToNumber = (value) => {
+    // Split the input string into an array of characters
+    const chars = value.split('');
+    console.log(chars);
+    // Filter the array to keep only numeric characters and periods
+    const filteredChars = chars.filter(char => !isNaN(char) || char === '.');
+    console.log(filteredChars);
+    // Join the filtered characters back into a string
+    const numericString = filteredChars.join('');
+    console.log(numericString);
+    // Convert the string to a floating-point number
+    return parseFloat(numericString);
+};
+
 // show card as per higher views to lower views
 const sortByViews = () => {
     categoryWiseData.sort((a, b) => {
-
-        const viewsA = parseFloat(a.others.views.replace(/[^\d.]/g, ''));
-        const viewsB = parseFloat(b.others.views.replace(/[^\d.]/g, ''));
+        const viewsA = extractAndConvertToNumber(a.others.views);
+        const viewsB = extractAndConvertToNumber(b.others.views);
         return viewsB - viewsA;
     });
     updateCategoryCards();
