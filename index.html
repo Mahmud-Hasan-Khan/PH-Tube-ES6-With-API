@@ -11,7 +11,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="container mx-auto py-3 xl:py-12 px-3 md:px-0">
+<body class="container mx-auto py-3 xl:py-12 px-3 md:px-3">
     <header>
         <!-- navbar -->
         <nav class="flex justify-between items-center">
@@ -19,8 +19,8 @@
                 <img src="./image/Logo.png" alt="">
             </div>
             <div>
-                <button
-                    class="bg-[#dedede] hover:bg-[#c8c7c7] px-3 xl:px-5 py-2 xl:py-3 rounded text-lg font-medium text-black">Sort
+                <button onclick="sortByView()"
+                    class="bg-[#d3d3d3] hover:bg-[#c8c7c7] px-3 xl:px-5 py-2 xl:py-3 rounded text-lg font-medium text-black">Sort
                     by view
                 </button>
             </div>
@@ -31,8 +31,18 @@
         </nav>
         <div class="divider"></div>
     </header>
-    <main class="mt-8">
 
+    <main class="mt-8">
+        <!-- category menu -->
+        <section id="categories-container" class="flex justify-center gap-5">
+            <!-- <button class="bg-[#dedede] hover:bg-[#d3d3d3] px-5 py-2 rounded-lg">All</button> -->
+
+        </section>
+
+        <!-- Display categories data -->
+        <div id="category-container" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mt-8">
+
+        </div>
     </main>
 
     <script src="./app.js"></script>
