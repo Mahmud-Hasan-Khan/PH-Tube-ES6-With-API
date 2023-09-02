@@ -30,6 +30,84 @@
             </div>
         </nav>
     </header>
+
+    <main class="my-10">
+        <!-- the scope of var, let, and const -->
+        <article class="bg-slate-100 p-4 mb-4">
+            <h3 class="text-4xl">Discuss the scope of var, let, and const</h3>
+            <div class="text-xl ml-4 p-4">
+                <ul class="list-disc">
+                    <li> <strong>var</strong> is a function-scoped variable, it can be accessed
+                        anywhere within the same
+                        function, even outside the block where they are declared.</li>
+                    <li>
+                        <strong>let</strong> and <strong>const</strong> variables are block-scoped, they can
+                        only be accessed within the same
+                        block (denoted by curly braces) where they are declared, and not outside of it.
+                    </li>
+                    <li>
+                        Additionally, <strong>const</strong> variables cannot be reassigned or redeclared, while let
+                        variables can be
+                        reassigned but not redeclared. <strong>var</strong> variables can be both reassigned and
+                        redeclared.
+                    </li>
+                </ul>
+            </div>
+        </article>
+
+        <!-- use cases of null and undefined -->
+        <article class="bg-slate-100 p-4">
+            <h3 class="text-4xl">The use cases of null and undefined</h3>
+            <div class="text-xl ml-4 p-4">
+                <ul class="list-disc">
+                    <li> <strong>undefined</strong> means that a variable has been declared but not assigned any value,
+                        or that a property or a function parameter does not exist. It is the default value for
+                        uninitialized variables and missing parameters. It indicates an unintentional or unknown state
+                        of the program</li>
+                    <li>
+                        <strong>Null</strong> means an empty value or a blank value. It is used to indicate a deliberate
+                        or known absence of a value. It can also be used to clear or reset a variable that previously
+                        had a value. The value null represents the intentional absence of any object value. It is one of
+                        JavaScript’s primitive values and is treated as false for boolean operations.
+                    </li>
+
+                </ul>
+            </div>
+        </article>
+
+        <!-- REST API -->
+        <article class="bg-slate-100 p-4 mt-4">
+            <h3 class="text-4xl">REST API</h3>
+            <div class="text-xl ml-4 p-4">
+                <ul class="list-disc">
+                    <li class="mb-2">
+                        A <strong>REST API</strong>, or Representational State Transfer Application Programming
+                        Interface, is a set of rules and conventions for building and interacting with web services. It
+                        is an architectural style for designing networked applications, particularly web services, that
+                        rely on a stateless client-server communication model. REST APIs are widely used for building
+                        distributed and scalable web applications.
+                    </li>
+                    <li>
+                        REST APIs communicate via HTTP requests to perform standard database functions like creating,
+                        reading, updating, and deleting records (also known as CRUD) within a resource. For example, a
+                        REST API would use a GET request to retrieve a record, a POST request to create one, a PUT
+                        request to update a record, and a DELETE request to delete one. All HTTP methods can be used in
+                        API calls.
+                        <br><br>
+                        The state of a resource at any particular instant, or timestamp, is known as the resource
+                        representation. This information can be delivered to a client in virtually any format including
+                        JavaScript Object Notation (JSON), HTML, XLT, Python, PHP, or plain text. JSON is popular
+                        because it’s readable by both humans and machines—and it is programming language-agnostic.
+                        <br><br>
+                        Request headers and parameters are also important in REST API calls because they include
+                        important identifier information such as metadata, authorizations, uniform resource identifiers
+                        (URIs), caching, cookies and more. Request headers and response headers, along with conventional
+                        HTTP status codes, are used within well-designed REST APIs.
+                    </li>
+                </ul>
+            </div>
+        </article>
+    </main>
 </body>
 
 </html>
