@@ -62,9 +62,10 @@ const updateCategoryCards = () => {
                             <p class="flex-grow-0">${singleCardData?.authors[0].profile_name}</p>
                             <p>${singleCardData?.authors[0].verified == true ? '<img src="./image/isVerified.png" alt="Verified Image">' : ''}</p>
                         </div>                      
-                        <p class="absolute bottom-28 right-4 p-2 rounded text-white" style="background-color: ${convertSecondsToHoursAndMinutes(singleCardData.others.posted_date ? singleCardData.others.posted_date : '') === '' ? '' : 'black'}">
+                        <p class="absolute bottom-36 right-4 p-2 rounded text-white" style="background-color: ${convertSecondsToHoursAndMinutes(singleCardData.others.posted_date ? singleCardData.others.posted_date : '') === '' ? '' : 'black'}">
                         ${convertSecondsToHoursAndMinutes(singleCardData.others.posted_date ? singleCardData.others.posted_date : '')}
                         </p>
+                        <p>${singleCardData?.others?.views} views</p>
                     </div>
                 </div>
                 `;
