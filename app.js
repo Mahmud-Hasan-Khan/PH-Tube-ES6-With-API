@@ -38,17 +38,15 @@ const updateCategoryCards = () => {
     // convert "posted_date" value seconds to Hour and Minutes
     function convertSecondsToHoursAndMinutes(totalSeconds) {
         const totalMinutes = Math.floor(totalSeconds / 60);
-        const seconds = totalSeconds % 60;
         const hours = Math.floor(totalMinutes / 60);
         const minutes = totalMinutes % 60;
 
         if (hours > 0 || minutes > 0) {
-            return `${hours}hrs ${minutes}min ago`;
+            return `${hours}hrs ${minutes} min ago`;
         } else {
             return '';
         }
     }
-
 
     categoryWiseData.forEach(singleCardData => {
         const categoriesCardDiv = document.createElement('div');
@@ -63,10 +61,10 @@ const updateCategoryCards = () => {
                         <div class="flex gap-1">
                             <p class="flex-grow-0">${singleCardData?.authors[0].profile_name}</p>
                             <p>${singleCardData?.authors[0].verified == true ? '<img src="./image/isVerified.png" alt="Verified Image">' : ''}</p>
-                        </div>
-
-                        <p>${singleCardData?.others?.views} views</p>
-                        <p class="absolute bottom-36 right-5 bg-black p-2 rounded text-white">${convertSecondsToHoursAndMinutes(singleCardData.others.posted_date ? singleCardData.others.posted_date : '')}</p>
+                        </div>                      
+                        <p class="absolute bottom-28 right-4 p-2 rounded text-white" style="background-color: ${convertSecondsToHoursAndMinutes(singleCardData.others.posted_date ? singleCardData.others.posted_date : '') === '' ? '' : 'black'}">
+                        ${convertSecondsToHoursAndMinutes(singleCardData.others.posted_date ? singleCardData.others.posted_date : '')}
+                        </p>
                     </div>
                 </div>
                 `;
