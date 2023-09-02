@@ -25,7 +25,7 @@ const loadCategoryWiseData = async (categoryId) => {
     const res = await fetch(`https://openapi.programming-hero.com/api/videos/category/${categoryId}`);
     const data = await res.json();
     categoryWiseData = data.data;
-    console.log(categoryWiseData);
+    // console.log(categoryWiseData);
     updateCategoryCards();
 }
 
@@ -97,13 +97,16 @@ const updateCategoryCards = () => {
 const extractAndConvertToNumber = (value) => {
     // Split the input string into an array of characters
     const chars = value.split('');
-    console.log(chars);
+    // console.log(chars);
+
     // Filter the array to keep only numeric characters and periods
     const filteredChars = chars.filter(char => !isNaN(char) || char === '.');
-    console.log(filteredChars);
+    // console.log(filteredChars);
+
     // Join the filtered characters back into a string
     const numericString = filteredChars.join('');
-    console.log(numericString);
+    // console.log(numericString);
+
     // Convert the string to a floating-point number
     return parseFloat(numericString);
 };
