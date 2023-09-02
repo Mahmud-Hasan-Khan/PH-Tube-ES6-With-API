@@ -35,6 +35,10 @@ const updateCategoryCards = () => {
     // clear card container before show another categories data 
     categoriesCardContainer.textContent = "";
 
+    // get card container when categoryWiseData.length is 0
+    const errorCardContainer = document.getElementById('error-category-container');
+    errorCardContainer.textContent = '';
+
     // convert "posted_date" value seconds to Hour and Minutes
     function convertSecondsToHoursAndMinutes(totalSeconds) {
         const totalMinutes = Math.floor(totalSeconds / 60);
@@ -48,29 +52,43 @@ const updateCategoryCards = () => {
         }
     }
 
-    categoryWiseData.forEach(singleCardData => {
-        const categoriesCardDiv = document.createElement('div');
-        categoriesCardDiv.innerHTML = `
-                <div class="card card-compact bg-base-100 shadow-xl relative">
-                    <figure><img class="h-56 w-full" src=${singleCardData.thumbnail} alt="Category Info" /></figure>
-                    <div class="card-body">
-                        <div class="flex items-center gap-3">
-                            <img class="w-10 h-10 rounded-full inline" src=${singleCardData?.authors[0]?.profile_picture} >
-                            <h2 class="card-title">${singleCardData.title}</h2>
-                        </div>
-                        <div class="flex gap-1">
-                            <p class="flex-grow-0">${singleCardData?.authors[0].profile_name}</p>
-                            <p>${singleCardData?.authors[0].verified == true ? '<img src="./image/isVerified.png" alt="Verified Image">' : ''}</p>
-                        </div>                      
-                        <p class="absolute bottom-36 right-4 p-2 rounded text-white" style="background-color: ${convertSecondsToHoursAndMinutes(singleCardData.others.posted_date ? singleCardData.others.posted_date : '') === '' ? '' : 'black'}">
-                        ${convertSecondsToHoursAndMinutes(singleCardData.others.posted_date ? singleCardData.others.posted_date : '')}
-                        </p>
-                        <p>${singleCardData?.others?.views} views</p>
-                    </div>
+    if (categoryWiseData.length === 0) {
+        const emptyDataDiv = document.createElement('div');
+        emptyDataDiv.innerHTML = `
+            <div class="card w-96 items-center">
+                <img src="./image/Icon.png" alt="error Image">
+                <div class="card-body">
+                    <p class="text-3xl font-bold text-center">Oops!! Sorry, There is no content here</p>
                 </div>
-                `;
-        categoriesCardContainer.appendChild(categoriesCardDiv);
-    });
+            </div>
+        `;
+        errorCardContainer.appendChild(emptyDataDiv);
+    } else {
+        categoryWiseData.forEach(singleCardData => {
+            const categoriesCardDiv = document.createElement('div');
+            categoriesCardDiv.innerHTML = `
+                    <div class="card card-compact bg-base-100 shadow-xl relative">
+                        <figure><img class="h-56 w-full" src=${singleCardData.thumbnail} alt="Category Info" /></figure>
+                        <div class="card-body">
+                            <div class="flex items-center gap-3">
+                                <img class="w-10 h-10 rounded-full inline" src=${singleCardData?.authors[0]?.profile_picture} >
+                                <h2 class="card-title">${singleCardData.title}</h2>
+                            </div>
+                            <div class="flex gap-1">
+                                <p class="flex-grow-0">${singleCardData?.authors[0].profile_name}</p>
+                                <p>${singleCardData?.authors[0].verified == true ? '<img src="./image/isVerified.png" alt="Verified Image">' : ''}</p>
+                            </div>                      
+                            <p class="absolute bottom-36 right-4 p-2 rounded text-white" style="background-color: ${convertSecondsToHoursAndMinutes(singleCardData.others.posted_date ? singleCardData.others.posted_date : '') === '' ? '' : 'black'}">
+                            ${convertSecondsToHoursAndMinutes(singleCardData.others.posted_date ? singleCardData.others.posted_date : '')}
+                            </p>
+                            <p>${singleCardData?.others?.views} views</p>
+                        </div>
+                    </div>
+                    `;
+            categoriesCardContainer.appendChild(categoriesCardDiv);
+        });
+    }
+
 };
 
 const extractAndConvertToNumber = (value) => {
