@@ -54,15 +54,19 @@ const updateCategoryCards = () => {
         const categoriesCardDiv = document.createElement('div');
         categoriesCardDiv.innerHTML = `
                 <div class="card card-compact bg-base-100 shadow-xl relative">
-                    <figure><img class="h-56" src=${singleCardData.thumbnail} alt="Category Info" /></figure>
+                    <figure><img class="h-56 w-full" src=${singleCardData.thumbnail} alt="Category Info" /></figure>
                     <div class="card-body">
                         <div class="flex items-center gap-3">
                             <img class="w-10 h-10 rounded-full inline" src=${singleCardData?.authors[0]?.profile_picture} >
                             <h2 class="card-title">${singleCardData.title}</h2>
                         </div>
-                        <p>${singleCardData?.authors[0].profile_name}</p>
+                        <div class="flex gap-1">
+                            <p class="flex-grow-0">${singleCardData?.authors[0].profile_name}</p>
+                            <p>${singleCardData?.authors[0].verified == true ? '<img src="./image/isVerified.png" alt="Verified Image">' : ''}</p>
+                        </div>
+
                         <p>${singleCardData?.others?.views} views</p>
-                        <p class="absolute bottom-36 right-5 bg-black px-1.5 py-1 rounded text-white">${convertSecondsToHoursAndMinutes(singleCardData.others.posted_date ? singleCardData.others.posted_date : '')}</p>
+                        <p class="absolute bottom-36 right-5 bg-black p-2 rounded text-white">${convertSecondsToHoursAndMinutes(singleCardData.others.posted_date ? singleCardData.others.posted_date : '')}</p>
                     </div>
                 </div>
                 `;
